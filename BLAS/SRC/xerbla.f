@@ -76,7 +76,11 @@
 *
       WRITE( *, FMT = 9999 )SRNAME( 1:LEN_TRIM( SRNAME ) ), INFO
 *
-      STOP
+*     Return instead of STOP, as the description above allows: the
+*     library runs inside a Python process, and the callers report
+*     the illegal value through INFO.
+*
+      RETURN
 *
  9999 FORMAT( ' ** On entry to ', A, ' parameter number ', I2, ' had ',
      $      'an illegal value' )

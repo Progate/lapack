@@ -155,6 +155,10 @@ macro(CheckLAPACKCompilerFlags)
   elseif(CMAKE_Fortran_COMPILER_ID STREQUAL "Flang")
     add_compile_options("$<$<COMPILE_LANGUAGE:Fortran>:-Mrecursive>")
 
+  # LLVM Flang (flang-new) allocates local arrays on the stack unless they
+  # have the SAVE attribute, and has no flag to request it
+  elseif(CMAKE_Fortran_COMPILER_ID STREQUAL "LLVMFlang")
+
   # Compaq Fortran
   elseif(CMAKE_Fortran_COMPILER_ID STREQUAL "Compaq")
     if(WIN32)
